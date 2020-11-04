@@ -1,0 +1,69 @@
+<div *ngIf='task' id='overlay' style="display: inline;"></div>
+<div *ngIf="task" class='overlay'>
+  <div class="nameclose">
+    <h2>Edit Task: {{task.name}}</h2>
+    <button class="cancelbutton" (click)="close();">Cancel <fa-icon icon="times" class='icon'>
+      </fa-icon>
+    </button>
+  </div>
+  <div class=tags>
+    <div class='id tag'>Task ID: {{task.id}}</div>
+    <div class="dpt tag">
+      <fa-icon icon="building"></fa-icon>
+      {{getDeptName(task.departmentID)}} Department
+    </div>
+  </div>
+  <form [formGroup]="editTaskForm">
+    <!-- name -->
+    <mat-form-field>
+      <mat-label>Task name</mat-label>
+      <input matInput formControlName="name" [ngModel]="task.name">
+      <!-- name validation -->
+      <mat-error *ngIf="name.invalid && name.touched">
+        Please provide a task name
+      </mat-error>
+    </mat-form-field>
+
+    <!-- due date -->
+    <mat-form-field>
+      <mat-label>Due date: {{task.duedate | date}}</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="duedate" [ngModel]="task.duedate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+
+      <!-- date validation-->
+      <mat-error *ngIf="duedate.invalid && duedate.touched">
+        Please select a (valid) due date
+      </mat-error>
+    </mat-form-field>
+
+    <!-- description -->
+    <mat-form-field>
+      <mat-label>Task description</mat-label>
+      <textarea matInput formControlName="description" [ngModel]="task.description"></textarea>
+      <!-- description validation-->
+      <mat-error *ngIf="description.invalid && description.touched">
+        Please provide a task description
+      </mat-error>
+    </mat-form-field>
+
+    <!-- employees -->
+    <div>
+      {{getInitialEmps()}}
+      <mat-label>Employees working on task</mat-label>
+      <div *ngFor="let emp of getEmployeesByDept(task.departmentID); let i=index">
+        <input type="checkbox" [value]="emp.id" (change)="onCheckboxChange($event)"
+          [checked]='task.employees.includes(emp.id)' />
+        {{emp.first_name}} {{emp.last_name}}
+      </div>
+      <!-- employee validation error-->
+      <mat-error *ngIf="!empSelected" style="font-size: 12px;">
+        Please select one or more employees
+      </mat-error>
+    </div>
+    <!-- button -->
+    <button class="addtaskbutton" [disabled]="editTaskForm.invalid || !empSelected" [formGroup]="editTaskForm"
+      type="button" (click)="saveTask()">Save
+      task</button>
+  </form>
+</div>

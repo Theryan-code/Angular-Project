@@ -1,0 +1,144 @@
+/* heading and buttons */
+.nameclose{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nameclose h2{
+  margin:0 0 10px 0;
+}
+
+/* buttons */
+button {
+  border: none;
+  height: 40px;
+  border-radius: 4px;
+  font-weight: 900;
+  margin: 10px 0;
+}
+
+button.primarybtn:disabled{
+  background-color:  #8e8e8e;;
+}
+
+button.primarybtn{
+    width: 40%;
+    background-color: #439e43;
+    color: white;
+    align-self: flex-end;
+}
+
+button.primarybtn:hover {
+  background-color: #3a8a3a;
+}
+
+
+button.cancelbutton{
+  color: #8e8e8e;
+  background-color: transparent;
+  align-self: flex-start;
+  margin: 0;
+}
+
+button.cancelbutton:hover{
+  color: #484848;
+}
+
+/* view container */
+.container {
+  width: 90%;
+  display: flex;
+  margin: 0 auto;
+  flex-flow: column wrap;
+}
+
+.description {
+  margin: 15px 0;
+}
+
+/* styling tags */
+.tags {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.tag {
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  border-radius: 4px;
+  color: white;
+  font-weight: 700;
+  font-size: 10px;
+  margin: 0 5px;
+}
+
+.id {
+  background-color: #2468f0;
+  margin-left: 0;
+}
+
+.dpt {
+  background-color: #2468f0;
+}
+
+.dd {
+  background-color: #c85050;
+}
+
+.stat {
+  background-color: #439e43;
+}
+
+p{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.name p,
+.building p {
+  margin: 5px auto;
+}
+
+span{
+  font-weight: 700;
+}
+
+/* overlay/popup */
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0000005a;
+  z-index: 100;
+  cursor: pointer;
+  transition-duration: 1s;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  width: 50%;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+   bottom: 0;
+   right: 0;
+  height: fit-content;
+  background-color: #fff;
+  z-index: 1000;
+  display: flex;
+  padding: 20px;
+  border-radius: 4px;
+}

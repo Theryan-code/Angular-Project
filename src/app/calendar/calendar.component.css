@@ -1,0 +1,11 @@
+@import '../../../node_modules/@fullcalendar/common/main.css';
+@import '../../../node_modules/@fullcalendar/daygrid/main.css';
+
+.calendar-container{
+  width:90%;
+  margin:20px auto;
+}
+
+full-calender{
+  height:90vh;
+}

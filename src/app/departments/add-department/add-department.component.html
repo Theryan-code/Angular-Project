@@ -1,0 +1,67 @@
+<div *ngIf='addnewdept' id='overlay' style="display: inline;"></div>
+<div *ngIf="addnewdept" class='overlay'>
+
+  <form [formGroup]="addDeptForm">
+
+    <div class="nameclose">
+      <h2>Add Department</h2>
+      <button class="cancelbutton" (click)="close();">Cancel <fa-icon icon="times" class='icon'>
+        </fa-icon>
+      </button>
+    </div>
+    <hr>
+
+    {{addDeptForm.value | json}}
+    <!-- name -->
+    <mat-form-field>
+      <mat-label>Enter a department name *</mat-label>
+      <input matInput formControlName="name">
+      <!-- name validation-->
+      <mat-error *ngIf="name.invalid && name.touched">
+        Please provide a task name
+      </mat-error>
+    </mat-form-field>
+
+    <!-- building -->
+    <mat-form-field>
+      <mat-label>Enter a building name *</mat-label>
+      <input matInput formControlName="building">
+      <!-- name validation-->
+      <mat-error *ngIf="building.invalid && building.touched">
+        Please provide a building name
+      </mat-error>
+    </mat-form-field>
+
+    <!-- employees -->
+    <div>
+      <mat-label>Employees *</mat-label>
+      <div *ngFor="let emp of emps; let i=index">
+        <input type="checkbox" [value]="emp.id" (change)="onCheckboxChange($event)" />
+        {{emp.first_name}} {{emp.last_name}}
+      </div>
+      <!-- employee validation error-->
+      <mat-error *ngIf="!empSelected" style="font-size: 12px;">
+        Please select one or more employees
+      </mat-error>
+    </div>
+
+<!-- employees -->
+<!-- <mat-form-field>
+  <mat-label>Employees *</mat-label>
+  <div *ngFor="let emp of employees">
+    <input type="checkbox" name="employees" value="{{emp}}"
+      (change)="updateEmpChoice(emp.id, $event)" />
+
+    {{emp.first_name}} {{emp.last_name}} -->
+  <!-- </div> -->
+  <!-- employee validation error-->
+  <!-- <mat-error *ngIf="!empSelected" style="font-size: 12px;">
+    Please select one or more employees
+  </mat-error>
+</mat-form-field> -->
+
+    <!-- button -->
+    <button class="adddeptbutton" [disabled]="addDeptForm.invalid || !empSelected" (click)="AddDept()"
+      [formGroup]="addDeptForm" type="button">Add dept</button>
+  </form>
+</div>

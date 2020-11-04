@@ -1,0 +1,147 @@
+form{
+  display: flex;
+  flex-direction: column;
+  width:100%;
+}
+
+.nameclose{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nameclose h2{
+  margin:0 0 10px 0;
+}
+
+/* buttons */
+button {
+  border: none;
+  height: 40px;
+  border-radius: 4px;
+  font-weight: 900;
+  margin: 10px 0;
+}
+
+button.addtaskbutton{
+  width: 40%;
+  background-color: #439e43;
+  color: white;
+  align-self: flex-end;
+}
+
+button.addtaskbutton:hover {
+  background-color: #357b35;
+}
+
+button.addtaskbutton:disabled{
+  background-color:  #8e8e8e;;
+}
+
+button.cancelbutton{
+  color: #8e8e8e;
+  background-color: transparent;
+  align-self: flex-start;
+  margin: 0;
+  margin-left: 20px;
+}
+
+button.cancelbutton:hover{
+  color: #484848;
+}
+
+.icon{
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.addtaskbutton .icon{
+margin-left:10px;
+}
+
+/* text area */
+
+textarea {
+  margin: 10px 0;
+  resize: vertical;
+  height: 100px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.textarea{
+  /* width: 100%; */
+  display: flex;
+  flex-flow: column wrap;
+}
+
+/* styling tags */
+.tags {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.tag {
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  border-radius: 4px;
+  color: white;
+  font-weight: 700;
+  font-size: 10px;
+  margin: 0 5px;
+}
+
+.id {
+  background-color: #2468f0;
+  margin-left: 0;
+}
+
+.dpt {
+  background-color: #2468f0;
+}
+
+.dd {
+  background-color: #c85050;
+}
+
+.stat {
+  background-color: #439e43;
+}
+
+/* overlay/popup */
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0000005a;
+  z-index: 100;
+  transition-duration: 1s;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  width: fit-content;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: fit-content;
+  background-color: #fff;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 4px;
+}

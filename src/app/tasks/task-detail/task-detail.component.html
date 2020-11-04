@@ -1,0 +1,33 @@
+<div *ngIf='task' id='overlay' (click)='close()' style="display: inline;"></div>
+<div *ngIf="task" class="container overlay">
+  <div class="nameclose">
+    <h2>{{task.name}}</h2>
+    <button class="cancelbutton" (click)="close()">
+      <fa-icon icon="times" class='icon'></fa-icon>
+    </button>
+  </div>
+
+  <div class="tags">
+    <div class='id tag'>Task ID: {{task.id}}</div>
+    <div class="dpt tag">
+      <fa-icon icon="building"></fa-icon>
+      {{getDeptName(task.departmentID)}}
+    </div>
+    <div class="dd tag">
+      <fa-icon icon="calendar-day"></fa-icon>
+      {{task.duedate | date:"dd/MM/yyy"}}
+    </div>
+  </div>
+  <div class="description">
+    <span>Task Description</span>
+    <p>{{task.description}}</p>
+  </div>
+  <div class="depinfo">
+    <span>{{getDeptName(task.departmentID)}} Department (ID: {{task.departmentID}})</span>
+    <p>Employees working on task:</p>
+    <ul class="empinfo" *ngFor="let employee of getEmployeesByTask(task.employees)">
+      <li>{{employee.first_name}} {{employee.last_name}}</li>
+    </ul>
+  </div>
+
+</div>

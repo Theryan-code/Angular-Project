@@ -1,0 +1,69 @@
+<div class="kop">
+  <h1>{{title}}</h1>
+  <button class="addtaskbutton" (click)="addTask()">Add Task &nbsp;&nbsp;&nbsp;&nbsp;<fa-icon icon="plus"></fa-icon>
+  </button>
+</div>
+
+<!-- the search bar -->
+<div class="search">
+  <input #searchBox id="search-box" (input)="search(searchBox.value)" placeholder="Search task by name" />
+  <button class="clearsearchbtn" *ngIf="searchBox.value.length>0" aria-label="Clear"
+    (click)='searchBox.value = null; clearSearch()'>
+    Clear <fa-icon icon="undo" class='icon'></fa-icon>
+  </button>
+</div>
+
+<!--
+  shows message when there are no matches found
+
+  Explanation (matchedTasks$ | async)?.length :
+  this expression gets the number of items in the matchedTasks observable
+
+  * matchedTasks$ => the dollar sign ($) indicates that matchedTasks is an observable array
+  * async => the async pipe is needed because *ngFor cannot do anything with a observable itself, async subscribes to the matchedTask observable
+  * ? => the question mark (?) is required because the matchedTasks observable is only initiated after Angular renders the view the first time. The question mark prevents the remainder of the expression (everything on the right) to be evaluated until the left part becomes true/not null. (link: https://stackoverflow.com/a/38057574 comment 4)
+-->
+
+<p *ngIf="(matchedTasks$ | async)?.length == 0 && searchBox.value.length > 0" class="searchErrortxt">
+  No tasks found that matches the entered value: '{{searchBox.value}}'.
+</p>
+
+<!-- shows the matching results -->
+<ul *ngIf="(matchedTasks$ | async)?.length >= 0">
+  <li *ngFor="let task of matchedTasks$ | async">
+    {{task.name}}
+    <div class="buttons">
+      <button (click)="showTaskDetails(task)">
+        <fa-icon icon="eye" style="color: #2468f0;"></fa-icon>
+      </button>
+      <button (click)="editTaskDetails(task)">
+        <fa-icon icon="edit" style="color: #e6a845;"></fa-icon>
+      </button>
+      <button (click)="deleteTask(task); searchBox.value = null">
+        <fa-icon icon="trash-alt" style="color: #ca2f2f;"></fa-icon>
+      </button>
+    </div>
+  </li>
+</ul>
+
+<!-- show all the tasks when the search bar is empty or there are no matching results in the search  -->
+<ul *ngIf="(matchedTasks$ | async)?.length == 0 || searchBox.value.length <= 0">
+  <li *ngFor="let task of tasks">
+    {{task.name}}
+    <div class="buttons">
+      <button (click)="showTaskDetails(task)">
+        <fa-icon icon="eye" style="color: #2468f0;"></fa-icon>
+      </button>
+      <button (click)="editTaskDetails(task)">
+        <fa-icon icon="edit" style="color: #e6a845;"></fa-icon>
+      </button>
+      <button (click)="deleteTask(task)">
+        <fa-icon icon="trash-alt" style="color: #ca2f2f;"></fa-icon>
+      </button>
+    </div>
+  </li>
+</ul>
+
+<app-add-task [addnewtask]="addnewtask" (closeOverlay)="closeOverlay()"></app-add-task>
+<app-task-detail [task]="viewTask" (closeOverlay)="closeOverlay()"></app-task-detail>
+<app-edit-task *ngIf="editTask" [task]="editTask" (closeOverlay)="closeOverlay()"></app-edit-task>

@@ -1,0 +1,32 @@
+<div *ngIf='dept' id='overlay' (click)='close()' style="display: inline;"></div>
+<div *ngIf="dept" class="container overlay">
+  <div class="nameclose">
+    <h2>{{dept.name}}</h2>
+    <button class="cancelbutton" (click)="close()">
+      <fa-icon icon="times" class='icon'></fa-icon>
+    </button>
+  </div>
+
+  <div class="tags">
+    <div class='id tag'>Dept ID: {{dept.id}}</div>
+  </div>
+  <br>
+  <div class="name">
+    <span>Dept Name</span>
+    <p>{{dept.name}}</p>
+  </div>
+  <div class="building">
+    <span>Dept Building</span>
+    <p>{{dept.building}}</p>
+  </div>
+  <div class="depinfo">
+    <!-- <span>{{getDeptName(dept.departmentID)}} Department (ID: {{dept.departmentID}})</span> -->
+    <p>Employees working on dept:</p>
+    
+    <ul class="empinfo" *ngFor="let emp of getEmployeesByDept(dept.id)">
+      <li>{{emp.first_name}} {{emp.last_name}}</li>
+    </ul>
+  </div>
+
+
+</div>

@@ -1,0 +1,70 @@
+<div class="heading">
+  <h1>{{title}}</h1>
+  <button class="adddeptbutton" (click)="addDept()">Add Dept <fa-icon icon="plus"></fa-icon>
+  </button>
+</div>
+
+<!-- the search bar -->
+<div class="search">
+  <input #searchBox id="search-box" (input)="search(searchBox.value)" placeholder="Search depts by name" />
+  <button class="clearsearchbtn" *ngIf="searchBox.value.length>0" aria-label="Clear"
+    (click)='searchBox.value = null; clearSearch()'>
+    Clear <fa-icon icon="undo" class='icon'></fa-icon>
+  </button>
+</div>
+
+<!--
+  shows message when there are no matches found
+
+  Explanation (matchedDepts$ | async)?.length :
+  this expression gets the number of items in the matchedDepts observable
+
+  * matchedDepts$ => the dollar sign ($) indicates that matchedDepts is an observable array
+  * async => the async pipe is needed because *ngFor cannot do anything with a observable itself, async subscribes to the matchedDept observable
+  * ? => the question mark (?) is required because the matchedDepts observable is only initiated after Angular renders the view the first time. The question mark prevents the remainder of the expression (everything on the right) to be evaluated until the left part becomes true/not null. (link: https://stackoverflow.com/a/38057574 comment 4)
+-->
+
+<p *ngIf="(matchedDepts$ | async)?.length == 0 && searchBox.value.length > 0" class="searchErrortxt">
+  No depts found that matches the entered value: '{{searchBox.value}}'.
+</p>
+
+<!-- shows the matching results -->
+<ul *ngIf="(matchedDepts$ | async)?.length >= 0">
+  <li *ngFor="let dept of matchedDepts$ | async">
+    {{dept.name}}
+    <div class="buttons">
+      <button (click)="showDeptDetails(dept)">
+        <fa-icon icon="eye" style="color: #2468f0;"></fa-icon>
+      </button>
+      <button (click)="editDeptDetails(dept)">
+        <fa-icon icon="edit" style="color: #e6a845;"></fa-icon>
+      </button>
+      <button (click)="deleteDept(dept); searchBox.value = null">
+        <fa-icon icon="trash-alt" style="color: #ca2f2f;"></fa-icon>
+      </button>
+    </div>
+  </li>
+</ul>
+
+<!-- show all the depts when the search bar is empty or there are no matching results in the search  -->
+<ul *ngIf="(matchedDepts$ | async)?.length == 0 || searchBox.value.length <= 0">
+  <li *ngFor="let dept of depts">
+    {{dept.name}}
+    <div class="buttons">
+      <button (click)="showDeptDetails(dept)">
+        <fa-icon icon="eye" style="color: #2468f0;"></fa-icon>
+      </button>
+      <button (click)="editDeptDetails(dept)">
+        <fa-icon icon="edit" style="color: #e6a845;"></fa-icon>
+      </button>
+      <button (click)="deleteDept(dept)">
+        <fa-icon icon="trash-alt" style="color: #ca2f2f;"></fa-icon>
+      </button>
+    </div>
+  </li>
+</ul>
+
+
+<app-add-department [addnewdept]="addnewdept" (closeOverlay)="closeOverlay()"></app-add-department>
+<app-department-detail [dept]="viewDept" (closeOverlay)="closeOverlay()"></app-department-detail>
+<app-edit-department *ngIf="editDept" [dept]="editDept" (closeOverlay)="closeOverlay()"></app-edit-department>

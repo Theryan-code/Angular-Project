@@ -1,0 +1,42 @@
+<!--Edit here-->
+
+<div *ngIf="employee && edit===true">
+
+  <h2>Edit Employee</h2>
+  <div class=tags>
+    <div>Employee ID: {{employee.id}}</div>
+  </div>
+  <div class="edit-container">
+    <div>
+      <label>
+        <span>Employee Name:</span>{{employee.first_name}}
+        <input [(ngModel)]="employee.first_name" placeholder="first name" />
+      </label>
+      <label>
+        <span>Last Name: </span>{{employee.last_name}}
+        <input [(ngModel)]="employee.last_name" placeholder="last name" />
+      </label>
+      <label for="departments"><span>Department: {{getDeptName(employee.department_id)}}</span>
+      </label>
+      <label>
+        <span>Birth Date {{employee.birth_date | date:"dd/MM/yyy"}}</span>
+        <input type="date" [value]="employee.birth_date" [(ngModel)]="employee.birth_date">
+      </label>
+    </div>
+  </div>
+  <button (click)="Save()">Save</button>
+
+</div>
+
+<!--View here-->
+
+<div *ngIf="employee && edit===false" class="container">
+  <h2>{{employee.first_name}}</h2>
+  <div>
+    <div class='id tag'><fa-icon icon="id-card-alt"></fa-icon>ID:{{employee.id}}</div>
+    <div class='firstN'>First Name:{{employee.first_name}}</div>
+    <div class='lastN'>Last Name:{{employee.last_name}}</div>
+    <div><fa-icon icon="calendar-alt"></fa-icon>{{employee.birth_date | date:"dd/MM/yyy"}}</div>
+    <div>Department: {{getDeptName(employee.department_id)}} (ID: {{employee.department_id}})</div>
+  </div>
+</div>

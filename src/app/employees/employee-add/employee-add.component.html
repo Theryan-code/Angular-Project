@@ -1,0 +1,28 @@
+<div *ngIf="addnewemployee">
+  <h2>Add Employee</h2>
+  <div class="details">
+    <label>
+      First Name
+      <input type="text" placeholder="Enter first name" [(ngModel)]="newEmployee.first_name">
+    </label>
+    <label>
+      Last Name
+      <input type="text" placeholder="Enter last name" [(ngModel)]="newEmployee.last_name">
+    </label>
+    <label>
+      ID
+      <input type="number" placeholder="Enter Employee ID" [(ngModel)]="newEmployee.id" />
+    </label>
+    <label for="departments">
+      <span>Select Department:</span>
+      <select name="departments" id="departments" [(ngModel)]="selectedDept">
+        <option [ngValue]="dept" *ngFor="let dept of depts">{{dept.name}}</option>
+      </select>
+    </label>
+    <label>
+      Set birth date
+      <input type="date" [(ngModel)]="newEmployee.birth_date">
+    </label>
+  </div>
+  <button class="addemployeebutton" (click)="AddEmployee()">Add Employee<fa-icon icon="plus"></fa-icon></button>
+</div>

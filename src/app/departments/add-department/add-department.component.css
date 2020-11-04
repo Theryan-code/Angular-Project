@@ -1,0 +1,104 @@
+
+
+form{
+  display: flex;
+  flex-direction: column;
+  width:100%;
+}
+
+.nameclose{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+button {
+  border: none;
+  height: 40px;
+  border-radius: 4px;
+  font-weight: 900;
+  margin: 10px 0;
+}
+
+button.adddeptbutton{
+  width: 40%;
+  background-color: #439e43;
+  color: white;
+  align-self: flex-end;
+}
+
+button.adddeptbutton:hover {
+  background-color: #357b35;
+}
+
+button.adddeptbutton:disabled{
+  background-color:  #8e8e8e;;
+}
+
+button.cancelbutton{
+  color: #8e8e8e;
+  background-color: transparent;
+  align-self: flex-start;
+  margin: 0;
+}
+
+button.cancelbutton:hover{
+  color: #484848;
+}
+
+.icon{
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.adddeptbutton .icon{
+margin-left:10px;
+}
+
+textarea {
+  margin: 10px 0;
+  resize: vertical;
+  height: 100px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.textarea{
+  /* width: 100%; */
+  display: flex;
+  flex-flow: column wrap;
+}
+
+/* overlay/popup */
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0000005a;
+  z-index: 100;
+  transition-duration: 1s;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  width: 33%;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: fit-content;
+  background-color: #fff;
+  z-index: 1000;
+  display: flex;
+  padding: 20px;
+  border-radius: 4px;
+}

@@ -1,0 +1,57 @@
+<div *ngIf='dept' id='overlay' style="display: inline;"></div>
+<div *ngIf="dept" class='overlay'>
+  <div class="nameclose">
+    <h2>Edit Dept: {{dept.name}}</h2>
+    <button class="cancelbutton" (click)="close();">Cancel <fa-icon icon="times" class='icon'>
+      </fa-icon>
+    </button>
+  </div>
+  <div class=tags>
+    <div class='id tag'>Dept ID: {{dept.id}}</div>
+    <div class="dpt tag">
+      <fa-icon icon="building"></fa-icon>
+      {{getDeptName(dept.id)}} Department
+    </div>
+  </div>
+  <form [formGroup]="editDeptForm">
+    <!-- name -->
+    <mat-form-field>
+      <mat-label>Dept name</mat-label>
+      <input matInput formControlName="name" [ngModel]="dept.name">
+      <!-- name validation -->
+      <mat-error *ngIf="name.invalid && name.touched">
+        Please provide a dept name
+      </mat-error>
+    </mat-form-field>
+
+    <!-- building -->
+    <mat-form-field>
+      <mat-label>Dept building</mat-label>
+      <input matInput formControlName="building" [ngModel]="dept.building">
+      <!-- building validation-->
+      <mat-error *ngIf="building.invalid && building.touched">
+        Please provide a dept building
+      </mat-error>
+    </mat-form-field>
+
+    {{editDeptForm.value | json}}
+    <!-- employees -->
+    <div>
+      {{getInitialEmps()}}
+      <mat-label>Employees working on dept</mat-label>
+      <div *ngFor="let emp of emps; let i=index">
+        <input type="checkbox" [value]="emp.id" (change)="onCheckboxChange($event)"
+          [checked]='dept.employeeID.includes(emp.id)' />
+        {{emp.first_name}} {{emp.last_name}}
+      </div>
+      <!-- employee validation error-->
+      <mat-error *ngIf="!empSelected" style="font-size: 12px;">
+        Please select one or more employees
+      </mat-error>
+    </div>
+    <!-- button -->
+    <button class="adddeptbutton" [disabled]="editDeptForm.invalid || !empSelected" [formGroup]="editDeptForm"
+      type="button" (click)="saveDept()">Save
+      dept</button>
+  </form>
+</div>
